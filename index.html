@@ -3,188 +3,270 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Clawpilot · STU Townhall — Pick a Style</title>
+<title>Clawpilot — Less Toil. More Wins.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d1117;
-    --bg-2: #161b22;
-    --panel: rgba(255,255,255,0.04);
-    --border: rgba(255,255,255,0.1);
-    --text: #e7ecf3;
-    --muted: #8b949e;
-    --accent: #6ea8ff;
-    --accent-2: #b388ff;
+    --bg: #050507;
+    --panel: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.08);
+    --text: #fafafa;
+    --muted: #8a8a93;
+    --neon: #00ffa3;
+    --hot: #ff3366;
+    --azure: #00b4ff;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body { font-family: 'Space Grotesk', sans-serif; color: var(--text); line-height: 1.5; overflow-x: hidden; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .nav-back { position: fixed; top: 16px; right: 16px; background: rgba(0,0,0,0.6); color: var(--text); padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); border-radius: 4px; z-index: 100; backdrop-filter: blur(10px); }
+
+  /* Top bar */
+  .topbar { border-bottom: 1px solid var(--border); padding: 18px 0; position: sticky; top: 0; background: rgba(5,5,7,0.8); backdrop-filter: blur(12px); z-index: 50; }
+  .topbar-row { display: flex; justify-content: space-between; align-items: center; }
+  .brand { font-weight: 700; letter-spacing: -0.02em; font-size: 18px; }
+  .brand .dot { color: var(--neon); }
+  .topbar-stats { display: flex; gap: 28px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+  .topbar-stats span strong { color: var(--text); margin-right: 6px; }
+  @media (max-width: 800px) { .topbar-stats { display: none; } }
+
+  /* Hero */
+  .hero { padding: 80px 0 60px; position: relative; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
     background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(110,168,255,0.12), transparent 60%),
-      radial-gradient(1000px 500px at 90% 0%, rgba(179,136,255,0.12), transparent 60%),
-      var(--bg);
-    min-height: 100vh; line-height: 1.55;
+      radial-gradient(800px 400px at 20% 10%, rgba(0,255,163,0.08), transparent 70%),
+      radial-gradient(600px 300px at 90% 30%, rgba(255,51,102,0.06), transparent 70%);
+    pointer-events: none;
   }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
-  header { padding: 80px 0 40px; text-align: center; }
-  .badge {
-    display: inline-block; padding: 6px 14px; border-radius: 999px;
-    background: rgba(110,168,255,0.12); color: var(--accent);
-    border: 1px solid rgba(110,168,255,0.35);
-    font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-    margin-bottom: 20px;
+  .pre {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--neon);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
   }
-  h1 {
-    font-size: clamp(36px, 5vw, 56px); font-weight: 800; margin: 0 0 16px; letter-spacing: -0.02em;
-    background: linear-gradient(120deg, #fff 0%, var(--accent) 60%, var(--accent-2) 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
+  .pre::before { content: ""; width: 24px; height: 1px; background: var(--neon); display: inline-block; }
+  h1.mega {
+    font-size: clamp(56px, 10vw, 140px); font-weight: 700; line-height: 0.92; letter-spacing: -0.04em;
+    margin: 0 0 32px; max-width: 1100px;
   }
-  .deck { color: var(--muted); font-size: 18px; max-width: 640px; margin: 0 auto 8px; }
-  .help { color: var(--muted); font-size: 14px; max-width: 640px; margin: 16px auto 0; opacity: 0.8; }
+  h1.mega .accent { color: var(--neon); font-style: italic; }
+  .hero-deck { font-size: clamp(18px, 1.8vw, 22px); color: var(--muted); max-width: 680px; margin-bottom: 40px; line-height: 1.5; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px;
+    text-decoration: none; border-radius: 8px; transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--neon); color: #000; }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
 
-  .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px; padding: 40px 0 80px;
+  /* Stat strip */
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    margin: 60px 0;
   }
-  .card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
-    overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease;
-    text-decoration: none; color: var(--text); display: flex; flex-direction: column;
-  }
-  .card:hover { transform: translateY(-4px); border-color: rgba(110,168,255,0.5); }
-  .preview { aspect-ratio: 4 / 3; padding: 18px; position: relative; overflow: hidden; }
-  .label-row { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-top: 1px solid var(--border); }
-  .label-row h3 { margin: 0; font-size: 17px; font-weight: 700; }
-  .label-row .arrow { color: var(--accent); font-size: 18px; }
-  .desc { padding: 0 22px 20px; color: var(--muted); font-size: 13px; }
+  .stat-strip .cell { padding: 32px 24px; border-right: 1px solid var(--border); }
+  .stat-strip .cell:last-child { border-right: 0; }
+  .stat-strip .n { font-size: clamp(40px, 5vw, 64px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+  .stat-strip .n .unit { color: var(--neon); font-size: 0.5em; margin-left: 8px; }
+  .stat-strip .l { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 14px; }
+  @media (max-width: 800px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } .stat-strip .cell { border-bottom: 1px solid var(--border); } .stat-strip .cell:nth-child(2) { border-right: 0; } }
 
-  /* Card 1: Classic - dark glass */
-  .preview-classic {
-    background:
-      radial-gradient(circle at 30% 20%, rgba(110,168,255,0.4), transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(179,136,255,0.4), transparent 50%),
-      #0b1020;
+  /* Section */
+  section { padding: 80px 0; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--neon);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px;
   }
-  .preview-classic::after {
-    content: "Meet Clawpilot"; position: absolute; bottom: 24px; left: 24px;
-    color: #fff; font-weight: 800; font-size: 22px;
-    background: linear-gradient(120deg, #fff, #6ea8ff); -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .preview-classic .tile-row {
-    position: absolute; top: 50%; left: 18px; right: 18px; transform: translateY(-50%);
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
-  }
-  .preview-classic .tile-row div { height: 36px; background: rgba(255,255,255,0.08); border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); }
+  .section-h { font-size: clamp(32px, 4vw, 56px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 48px; max-width: 800px; }
+  .section-h .muted { color: var(--muted); }
 
-  /* Card 2: Editorial - newspaper */
-  .preview-editorial {
-    background: #f5f1e8; padding: 16px;
-    display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .preview-editorial .top { font-family: 'Inter', serif; }
-  .preview-editorial .pub { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #1a1a1a; font-weight: 700; border-bottom: 2px double #1a1a1a; padding-bottom: 6px; margin-bottom: 8px; }
-  .preview-editorial .kicker { font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: #c8341a; font-weight: 600; font-style: italic; }
-  .preview-editorial .head { color: #1a1a1a; font-size: 22px; font-weight: 800; line-height: 1; margin-top: 4px; letter-spacing: -0.02em; }
-  .preview-editorial .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid #1a1a1a; border-bottom: 2px solid #1a1a1a; padding: 6px 0; gap: 4px; margin-top: 8px; }
-  .preview-editorial .stat { text-align: center; font-size: 14px; font-weight: 800; color: #c8341a; }
+  /* Capability flow */
+  .flow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .flow-col { padding: 32px; border-right: 1px solid var(--border); position: relative; }
+  .flow-col:last-child { border-right: 0; }
+  .flow-col .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--neon); letter-spacing: 0.16em; margin-bottom: 12px; }
+  .flow-col h3 { font-size: 22px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em; }
+  .flow-col p { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+  .flow-col ul { list-style: none; padding: 0; margin: 0; }
+  .flow-col li { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); padding: 8px 0; border-bottom: 1px dashed var(--border); display: flex; align-items: center; gap: 8px; }
+  .flow-col li::before { content: "▸"; color: var(--neon); }
+  .flow-col li:last-child { border-bottom: 0; }
+  @media (max-width: 900px) { .flow { grid-template-columns: 1fr; } .flow-col { border-right: 0; border-bottom: 1px solid var(--border); } .flow-col:last-child { border-bottom: 0; } }
 
-  /* Card 3: Cinematic - Hector style */
-  .preview-cinematic {
-    background: #050507;
-    color: #fafafa;
-    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-    padding: 22px;
-  }
-  .preview-cinematic .pre { font-family: monospace; font-size: 8px; color: #00ffa3; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
-  .preview-cinematic .pre::before { content: "— "; }
-  .preview-cinematic .mega { font-size: 30px; font-weight: 700; line-height: 0.92; letter-spacing: -0.04em; }
-  .preview-cinematic .mega .neon { color: #00ffa3; font-style: italic; }
-  .preview-cinematic .strip { display: flex; gap: 0; margin-top: 14px; width: 100%; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); }
-  .preview-cinematic .strip div { flex: 1; padding: 6px 4px; font-size: 14px; font-weight: 700; border-right: 1px solid rgba(255,255,255,0.15); }
-  .preview-cinematic .strip div:last-child { border-right: 0; }
+  /* Capabilities tile grid */
+  .cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .cap-tile { background: var(--bg); padding: 28px; }
+  .cap-tile .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--neon); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px; }
+  .cap-tile h4 { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+  .cap-tile p { color: var(--muted); font-size: 14px; margin: 0; }
 
-  /* Card 4: Minimal - Apple style */
-  .preview-minimal {
-    background: #fafafa; color: #111;
-    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-    padding: 22px;
+  /* Demo box */
+  .demo-strip {
+    background: linear-gradient(135deg, rgba(255,51,102,0.12), rgba(0,255,163,0.06));
+    border: 1px solid rgba(255,51,102,0.3);
+    border-radius: 20px;
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
   }
-  .preview-minimal .pre { font-size: 10px; color: #0066ff; font-weight: 500; margin-bottom: 8px; }
-  .preview-minimal .head { font-size: 22px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; }
-  .preview-minimal .sub { font-size: 11px; color: #6e6e73; margin-top: 6px; }
-  .preview-minimal .pill { margin-top: 12px; background: #111; color: #fafafa; padding: 6px 14px; border-radius: 100px; font-size: 10px; font-weight: 500; }
+  .demo-strip::before {
+    content: "LIVE"; position: absolute; top: 24px; right: 24px;
+    background: var(--hot); color: #000; font-family: 'JetBrains Mono', monospace;
+    font-weight: 700; font-size: 11px; padding: 4px 10px; border-radius: 4px;
+    letter-spacing: 0.14em; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .demo-strip .when { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--hot); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+  .demo-strip h3 { font-size: clamp(32px, 4vw, 48px); margin: 0 0 16px; letter-spacing: -0.02em; }
+  .demo-strip .sub { color: var(--muted); margin: 0 0 32px; }
+  .presenters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .presenter { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 20px; border-radius: 12px; }
+  .presenter .role-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--neon); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+  .presenter .name { font-size: 22px; font-weight: 700; }
+  .presenter .desc { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  @media (max-width: 700px) { .presenters { grid-template-columns: 1fr; } }
 
-  footer { text-align: center; padding: 40px 0 60px; color: var(--muted); font-size: 13px; }
-  footer a { color: var(--accent); text-decoration: none; }
+  /* Workshop */
+  .workshop {
+    border: 1px solid var(--border); border-radius: 20px; padding: 48px;
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center;
+    background: var(--panel);
+  }
+  .workshop h3 { font-size: 36px; margin: 0 0 12px; letter-spacing: -0.02em; }
+  .workshop p { color: var(--muted); margin: 0 0 16px; }
+  .workshop .checks { list-style: none; padding: 0; margin: 0; }
+  .workshop .checks li { font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 6px 0; }
+  .workshop .checks li::before { content: "[✓] "; color: var(--neon); }
+  @media (max-width: 800px) { .workshop { grid-template-columns: 1fr; } }
+
+  footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  footer a { color: var(--neon); text-decoration: none; margin: 0 12px; }
 </style>
 </head>
 <body>
-<header>
+
+<div class="topbar">
   <div class="container">
-    <span class="badge">★ Pick Your Style ★</span>
-    <h1>Clawpilot · STU Townhall</h1>
-    <p class="deck">Four design treatments. Same content. Click each to preview the full one-pager. Pick a winner for the Monday townhall.</p>
-    <p class="help">Pre-loaded stats from Robert's Axiom vault. Jeremiah Gutherie listed as co-presenter.</p>
+    <div class="topbar-row">
+      <div class="brand">CLAWPILOT<span class="dot">.</span></div>
+      <div class="topbar-stats">
+        <span><strong>v1.0.40</strong> deployed</span>
+        <span><strong>69</strong> meetings logged</span>
+        <span><strong>~75hr</strong> reclaimed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container">
+    <div class="pre">Clawpilot · Live Demo Monday at the STU Townhall</div>
+    <h1 class="mega">Less Toil.<br/><span class="accent">More Wins.</span></h1>
+    <p class="hero-deck">A desktop AI coworker that lives on your machine, sees your M365, runs your tools, and ships work while you focus on customers.</p>
+    <div class="hero-cta">
+      <a href="#demo" class="btn btn-primary">▶ Watch the demo</a>
+    </div>
   </div>
 </header>
 
 <div class="container">
-  <div class="grid">
-
-    <a href="classic.html" class="card">
-      <div class="preview preview-classic">
-        <div class="tile-row"><div></div><div></div><div></div></div>
-      </div>
-      <div class="label-row"><h3>1. Classic</h3><span class="arrow">→</span></div>
-      <p class="desc">Dark gradient with glass tiles. Modern SaaS landing-page energy.</p>
-    </a>
-
-    <a href="editorial.html" class="card">
-      <div class="preview preview-editorial">
-        <div class="top">
-          <div class="pub">The STU Dispatch</div>
-          <div class="kicker">Field Report</div>
-          <div class="head">My Laziness, Productized.</div>
-        </div>
-        <div class="stats">
-          <div class="stat">35</div><div class="stat">69</div><div class="stat">42</div><div class="stat">44</div>
-        </div>
-      </div>
-      <div class="label-row"><h3>2. Editorial</h3><span class="arrow">→</span></div>
-      <p class="desc">Newspaper / magazine feature. Big serif headline, drop cap, pull quote.</p>
-    </a>
-
-    <a href="cinematic.html" class="card">
-      <div class="preview preview-cinematic">
-        <div class="pre">Live demo Monday</div>
-        <div class="mega">Less Toil.<br/><span class="neon">More Wins.</span></div>
-        <div class="strip">
-          <div>~35hr</div><div>69</div><div>42</div><div>44</div>
-        </div>
-      </div>
-      <div class="label-row"><h3>3. Cinematic</h3><span class="arrow">→</span></div>
-      <p class="desc">Hector-style. Massive typography, neon accents, mono details. Demo-stage energy.</p>
-    </a>
-
-    <a href="minimal.html" class="card">
-      <div class="preview preview-minimal">
-        <div class="pre">As Seen On STU</div>
-        <div class="head">The desktop coworker who<br/>never asks for credit.</div>
-        <div class="sub">Lives on your machine. Ships work.</div>
-        <div class="pill">Watch the demo</div>
-      </div>
-      <div class="label-row"><h3>4. Minimal</h3><span class="arrow">→</span></div>
-      <p class="desc">Apple keynote calm. Lots of whitespace, restrained palette, big numbers.</p>
-    </a>
-
+  <div class="stat-strip">
+    <div class="cell"><div class="n">~75<span class="unit">hr</span></div><div class="l">Reclaimed · 12 weeks</div></div>
+    <div class="cell"><div class="n">69</div><div class="l">Meetings auto-logged</div></div>
+    <div class="cell"><div class="n">42</div><div class="l">Account preps generated</div></div>
+    <div class="cell"><div class="n">44</div><div class="l">Action items tracked</div></div>
   </div>
 </div>
 
+<section>
+  <div class="container">
+    <div class="section-label">Operating Model</div>
+    <h2 class="section-h">Strategy in. <span class="muted">Amplified execution out.</span></h2>
+    <div class="flow">
+      <div class="flow-col">
+        <div class="num">01 · INPUT</div>
+        <h3>You set the play</h3>
+        <p>Customer hypothesis. Account priorities. Format preferences. Standing rituals.</p>
+        <ul>
+          <li>Account books</li>
+          <li>Skill library</li>
+          <li>Personal cadence</li>
+        </ul>
+      </div>
+      <div class="flow-col">
+        <div class="num">02 · ENGINE</div>
+        <h3>Clawpilot orchestrates</h3>
+        <p>Persistent agents, scheduled heartbeats, and live skills coordinate across your stack.</p>
+        <ul>
+          <li>Customer context</li>
+          <li>Action item sync</li>
+          <li>Cross-system writes</li>
+        </ul>
+      </div>
+      <div class="flow-col">
+        <div class="num">03 · OUTPUT</div>
+        <h3>Execution lands everywhere</h3>
+        <p>Notes in Obsidian. Preps in your inbox. AIs on the tracker. Hygiene on MSX.</p>
+        <ul>
+          <li>Meeting notes</li>
+          <li>Account preps</li>
+          <li>MSX updates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Capabilities</div>
+    <h2 class="section-h">What it does.</h2>
+    <div class="cap-grid">
+      <div class="cap-tile"><div class="tag">/notes</div><h4>Meeting notes → Obsidian</h4><p>Pulls Teams transcripts, drafts the note, tags, links the account.</p></div>
+      <div class="cap-tile"><div class="tag">/account-prep</div><h4>Account prep on demand</h4><p>State of play, opps, push points, watch-outs in your house format.</p></div>
+      <div class="cap-tile"><div class="tag">/action-tracker</div><h4>AI sweep across systems</h4><p>Outlook + Teams + Obsidian → one running list, write-back when done.</p></div>
+      <div class="cap-tile"><div class="tag">/msx-hygiene</div><h4>MSX hygiene &amp; automations</h4><p>Risk-bucketed sweeps, milestone updates, forecast comments — no Dynamics required.</p></div>
+      <div class="cap-tile"><div class="tag">/data-on-demand</div><h4>Data on demand</h4><p>Ad-hoc MSX, Power BI, and account queries answered in seconds.</p></div>
+      <div class="cap-tile"><div class="tag">/skills</div><h4>Custom skills &amp; automations</h4><p>Heartbeats, scheduled briefs, your own slash-commands.</p></div>
+      <div class="cap-tile"><div class="tag">/integrations</div><h4>Connects to your stack</h4><p>M365, MSX, Obsidian, Power BI, browser, filesystem.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="container">
+    <div class="demo-strip">
+      <div class="when">★ Monday · STU Townhall</div>
+      <h3>The Clawpilot Demo</h3>
+      <p class="sub">Two presenters. Two angles on the same agent. Zero PowerPoint hand-waving.</p>
+      <div class="presenters">
+        <div class="presenter">
+          <div class="role-tag">Presenter 01</div>
+          <div class="name">Robert Wakefield</div>
+          <div class="desc">Daily usage + the Obsidian flywheel</div>
+        </div>
+        <div class="presenter">
+          <div class="role-tag">Presenter 02</div>
+          <div class="name">Jeremiah Gutherie</div>
+          <div class="desc">Bootstrapping notes with Clawpilot itself</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div>Repo: <a href="https://github.com/rwake24/clawpilot-stu">rwake24/clawpilot-stu</a></div>
+  <div class="container">
+    <div><a href="https://aka.ms/clawpilot">install</a> · <a href="#">skills_repo</a> · <a href="#">obsidian_template</a> · <a href="#">teams_channel</a></div>
+    <div style="margin-top: 16px;">// built with clawpilot. naturally.</div>
+  </div>
 </footer>
 </body>
 </html>
